@@ -24,13 +24,18 @@ public class UserService {
 	public User findById(String id) { 
 		 Optional<User> obj = repo.findById(id); 
 		 return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado")); 
-		} 
-
-	public User FromDTO(UserDTO obj) {
-		return new User(obj.getId(), obj.getName(), obj.getEmail());
 	}
 	
 	public User insert(User obj) {
 		return repo.insert(obj);
+	}
+	
+	public void deleteBy(String id) {
+		findById(id);
+		repo.deleteById(id);
+	}
+	
+	public User FromDTO(UserDTO obj) {
+		return new User(obj.getId(), obj.getName(), obj.getEmail());
 	}
 }
