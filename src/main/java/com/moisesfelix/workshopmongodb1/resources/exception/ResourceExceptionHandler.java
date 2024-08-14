@@ -11,12 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-	
+
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException obj, HttpServletRequest request){
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError(System.currentTimeMillis(), status.value(), "Não encontrado", obj.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
-
 }
