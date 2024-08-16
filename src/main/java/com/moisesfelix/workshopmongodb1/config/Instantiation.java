@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.moisesfelix.workshopmongodb1.domain.Post;
 import com.moisesfelix.workshopmongodb1.domain.User;
+import com.moisesfelix.workshopmongodb1.dto.AuthorDTO;
 import com.moisesfelix.workshopmongodb1.repositories.PostRepository;
 import com.moisesfelix.workshopmongodb1.repositories.UserRepository;
 
@@ -44,10 +45,11 @@ public class Instantiation implements CommandLineRunner {
 			User alex = new User(null, "Alex Green", "alex@gmail.com");
 			User bob = new User(null, "Bob Grey", "bob@gmail.com");
 			
-			Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem ", "Partiu viajar para São Paulo. Abraços!", maria);
-			Post post2 = new Post(null, sdf.parse("21/03/2018"), "Bom dia!", "Acordei entusiasmado hoje! ", maria);
-
 			userRepository.saveAll(Arrays.asList(maria, alex, bob));
+			
+			Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem ", "Partiu viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+			Post post2 = new Post(null, sdf.parse("21/03/2018"), "Bom dia!", "Acordei entusiasmado hoje! ", new AuthorDTO(maria));
+
 			postRepository.saveAll(Arrays.asList(post1, post2));
 		}
 	}
